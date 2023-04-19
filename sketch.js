@@ -6,6 +6,7 @@ var balao_red, balao_red_image, balao_blue, balao_blue_image, balao_pink, balao_
 var sorteio;
 var grupoFlecha;
 var grupo_red, grupo_blue, grupo_green, grupo_pink;
+var gameState = "play"
 
 function preload(){
   //imagens dos objetos
@@ -35,6 +36,7 @@ function setup() {
 
 function draw() {
  background(0);
+ if(gameState == "play"){
   if(keyWentDown('space')) {
     flechas();
   }
@@ -44,6 +46,7 @@ function draw() {
     pontuacao = pontuacao+ 150;
     grupo_red.destroyEach();
     grupoFlecha.destroyEach();
+    gameState = "end"
   }
   if(grupo_blue.isTouching(grupoFlecha)) {
     pontuacao = pontuacao+ 150;
@@ -60,6 +63,14 @@ function draw() {
     grupo_green.destroyEach();
     grupoFlecha.destroyEach();
   }
+ }
+ 
+ if(gameState == "end"){
+  fill("white")
+  Text("you win",200,200)
+   bow.destroy()
+ }
+
   drawSprites();
   
   fill('black');
